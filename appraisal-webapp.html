@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>K-City · 감정평가 — 추정 미리보기</title>
+<meta name="description" content="K-City 하위 모듈인 감정평가(추정)를 미리 살펴봅니다. 부동산 정보를 입력하면 추정 방식과 산출물 형태를 보여줍니다.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23153A2E%22/%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22%27Pretendard%27%2C%27Malgun%20Gothic%27%2Csans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3E%E5%9F%8E%3C/text%3E%3C/svg%3E">
+
+<script>
+window.K_AUTH_CONFIG = { serviceLabel: 'K-City · 감정평가' };
+</script>
+<script src="https://hondi.net/auth/k-service-auth-client.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root {
+  --gov: #0E2A21; --nav: #153A2E; --pri: #2E8B57; --pri-lt: #45B378;
+  --pri-bg: #E7F5EC; --pri-bd: #B7E0C6;
+  --sur: #FFFFFF; --bg: #F5F6FA; --bdr: #DFE2ED; --txt: #1A202C;
+  --sub: #4A5568; --hint: #718096;
+  --grn: #1B6B3A; --gbg: #E6F4EC; --org: #C05621; --obg: #FEF3E2;
+  --font: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  --r: 8px; --sh: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);font-size:14px;color:var(--txt);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font-family:var(--font);cursor:pointer}
+
+header{background:var(--nav);color:#fff;padding:0 20px;height:54px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.22)}
+header .logo{font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px}
+header .logo-icon{width:28px;height:28px;background:var(--pri-lt);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#0E2A21}
+header a.back{margin-left:auto;font-size:12px;color:rgba(255,255,255,.7);text-decoration:none}
+header a.back:hover{color:#fff}
+
+main{max-width:760px;margin:0 auto;padding:22px 18px 40px}
+.card{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);box-shadow:var(--sh);padding:22px;margin-bottom:18px}
+.card h2{font-size:15px;font-weight:800;margin-bottom:6px}
+.card .sub{font-size:12px;color:var(--sub);margin-bottom:16px;line-height:1.7}
+
+.notice{background:var(--obg);border:1px solid #F4D9B0;color:var(--org);border-radius:var(--r);padding:12px 15px;font-size:12.5px;margin-bottom:18px;line-height:1.7}
+.notice strong{font-weight:800}
+
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:var(--sub)}
+.field input,.field select{width:100%;padding:10px 12px;border:1px solid var(--bdr);border-radius:var(--r);font-size:13px;font-family:var(--font);background:var(--sur)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;border-radius:var(--r);font-size:13px;font-weight:700;border:none}
+.btn-primary{background:var(--pri);color:#fff}
+.btn-primary:hover{background:#256E45}
+
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700}
+.badge-est{background:var(--obg);color:var(--org)}
+.badge-confirmed{background:var(--gbg);color:var(--grn)}
+
+.result-amount{font-size:26px;font-weight:800;color:var(--pri);margin-bottom:4px}
+.result-meta{font-size:12px;color:var(--sub);margin-bottom:14px}
+.preview-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr);font-size:12.5px}
+.preview-row:last-child{border-bottom:none}
+.preview-row .pk{color:var(--sub)}
+.preview-row .pv{font-weight:700}
+.hint{font-size:11.5px;color:var(--hint);margin-top:10px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="logo-icon">城</span>K-City · 감정평가</div>
+  <a class="back" href="./appraisal.html">← 모듈 소개</a>
+</header>
+
+<main>
+  <div class="notice">
+    <strong>미리보기 화면입니다.</strong> 감정평가 모듈은 K-City의 하위 모듈로 아직 설계 단계이며, 실제 대화형 실행·과금·PDV 연동은 연결되지 않았습니다. 아래는 도시정비 모듈 등 다른 모듈이 이 모듈을 호출했을 때 받게 될 응답 형태를 미리 보여드립니다 — 표시되는 수치는 예시이며 실제 부동산 데이터가 아닙니다.
+  </div>
+
+  <div class="card">
+    <h2>대상 부동산 정보</h2>
+    <div class="sub">직접 문의든, 다른 모듈의 호출이든 같은 형식으로 처리됩니다.</div>
+    <div class="field">
+      <label>주소 — 예시로 입력해보세요</label>
+      <input type="text" id="addr-input" placeholder="예: 영도구 청학1구역 내 소유 주택">
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>면적(㎡)</label>
+        <input type="text" id="area-input" placeholder="예: 84.9">
+      </div>
+      <div class="field">
+        <label>용도</label>
+        <select id="type-input">
+          <option value="residential">주거(아파트·주택)</option>
+          <option value="land">토지</option>
+          <option value="commercial">상업(상가)</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>요청 목적</label>
+      <select id="purpose-input">
+        <option value="urban_renewal_contribution">재개발 분담금 참고용(도시정비 모듈 호출 예시)</option>
+        <option value="general_inquiry">일반 시세 문의</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" id="preview-btn">추정 미리보기 생성</button>
+    <div class="hint">이 버튼은 실제 서버에 요청을 보내지 않습니다 — 정본 문서(SP-27b_kcity_appraisal_v0_1.txt)의 §REQUEST-INTERFACE 응답 형식만 정적으로 보여줍니다.</div>
+  </div>
+
+  <div class="card" id="preview-card" style="display:none">
+    <h2>추정 결과 미리보기</h2>
+    <div class="result-amount" id="result-amount"></div>
+    <div class="result-meta" id="result-meta"></div>
+    <div id="preview-body"></div>
+    <div class="hint">위 수치는 모두 예시입니다. 실제로는 비교사례·공시지가 등 공개 자료를 근거로 산출하며, 방법 간 차이가 크면 그 차이를 함께 보고합니다(하나의 확정 숫자처럼 제시하지 않음).</div>
+  </div>
+</main>
+
+<script>
+document.getElementById('preview-btn').addEventListener('click', function(){
+  var purpose = document.getElementById('purpose-input').value;
+  document.getElementById('result-amount').textContent = '약 3.1억 원 (예시)';
+  document.getElementById('result-meta').textContent = '기준일 2026-09-09 · 신뢰도: 보통(medium) · 교차검증 방법 간 차이 6.2%';
+
+  var body = document.getElementById('preview-body');
+  body.innerHTML = '';
+  var rows = [
+    ['적용 방법', '비교사례법 + 공시지가기준법 (교차검증)', ''],
+    ['참조 사례', '인근 유사 거래 5건', ''],
+    ['출처', '2026년 개별공시지가 · 국토교통부 실거래가 공개시스템', 'confirmed'],
+    ['요청 목적', purpose === 'urban_renewal_contribution' ? '재개발 분담금 참고용 (도시정비 모듈 호출)' : '일반 시세 문의', ''],
+    ['고지', '참고용 추정치이며 법정 감정평가가 아님', 'est']
+  ];
+  rows.forEach(function(row){
+    var div = document.createElement('div');
+    div.className = 'preview-row';
+    var badge = row[2] === 'est' ? '<span class="badge badge-est" style="margin-left:6px">추정</span>'
+              : row[2] === 'confirmed' ? '<span class="badge badge-confirmed" style="margin-left:6px">확정 근거</span>' : '';
+    div.innerHTML = '<span class="pk">' + row[0] + '</span><span class="pv">' + row[1] + badge + '</span>';
+    body.appendChild(div);
+  });
+  document.getElementById('preview-card').style.display = 'block';
+  document.getElementById('preview-card').scrollIntoView({behavior:'smooth', block:'start'});
+});
+</script>
+
+</body>
+</html>
