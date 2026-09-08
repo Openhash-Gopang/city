@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="icon" href="data:,">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23153A2E%22/%3E%3Ctext%20x%3D%2232%22%20y%3D%2245%22%20font-family%3D%22%27Pretendard%27%2C%27Malgun%20Gothic%27%2Csans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3E%E5%9F%8E%3C/text%3E%3C/svg%3E">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-City — 재개발·재건축 정비사업을 함께 실행하는 AI</title>
-<meta name="description" content="K-City는 재개발·재건축 등 정비사업의 주민 의사 수렴, 법정 절차 진행, 감정평가 추정, 비용 추산, 분양 계획, 시공사 선정을 실행하는 혼디넷의 정비사업 보조 AI입니다. 주민·조합·지방자치단체·국가 네 역할을 모두 지원합니다.">
+<title>K-City — 시민 복지 총합 최적 도시 설계</title>
+<meta name="description" content="K-City는 도시 전체의 시민 복지 총합(주거·의료·교육·금융·교통·통신·레저)이 최상이 되는 시설 배치를 설계하는 혼디넷의 자문 서비스입니다.">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root {
-  --gov-header: #001233;
-  --gov-nav:    #1E2361;
-  --primary:    #4338CA;
-  --primary-dk: #362E9E;
-  --primary-lt: #6366F1;
-  --primary-bg: #EEF2FF;
-  --primary-bd: #C7D2FE;
-  --teal:       #0F8F7E;
-  --teal-dk:    #0B6F62;
-  --teal-bg:    #E4F5F2;
+  --gov-header: #0E2A21;
+  --gov-nav:    #153A2E;
+  --primary:    #2E8B57;
+  --primary-dk: #256E45;
+  --primary-lt: #45B378;
+  --primary-bg: #E7F5EC;
+  --primary-bd: #B7E0C6;
+  --blue:       #2563A8;
+  --blue-bg:    #E9F1FA;
   --surface:    #FFFFFF;
   --bg:         #F5F6FA;
   --border:     #DFE2ED;
@@ -41,31 +40,27 @@ body { font-family: var(--font); font-size: 14px; color: var(--text); background
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-.gov-bar { background: var(--gov-header); color: rgba(255,255,255,.72); font-size: 11px; padding: 6px 0; text-align: center; letter-spacing: .3px; font-weight: 500; }
-.gov-bar a { color: rgba(255,255,255,.90); font-weight: 700; }
-.gov-bar a:hover { text-decoration: underline; }
-
 .topnav { background: var(--gov-nav); position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 10px rgba(0,0,0,.22); }
-.topnav-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; height: 54px; position: relative; }
+.topnav-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; height: 54px; }
 .topnav-logo { display: flex; align-items: center; gap: 9px; font-size: 17px; font-weight: 800; color: #fff; letter-spacing: -.4px; padding-right: 18px; border-right: 1px solid rgba(255,255,255,.15); flex-shrink: 0; margin-right: 6px; }
 .topnav-logo-icon { width: 30px; height: 30px; background: var(--primary-lt); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; }
 .topnav-links { display: flex; flex: 1; }
-.topnav-links a { display: flex; align-items: center; padding: 0 15px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.72); transition: background .15s, color .15s; border-bottom: 3px solid transparent; white-space: nowrap; }
+.topnav-links a { display: flex; align-items: center; padding: 0 15px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.72); transition: background .15s, color .15s; white-space: nowrap; }
 .topnav-links a:hover { background: rgba(255,255,255,.08); color: #fff; }
 .topnav-right { display: flex; align-items: center; gap: 10px; margin-left: auto; padding-left: 16px; flex-shrink: 0; }
-.topnav-status { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); }
-.status-dot-amber { width: 7px; height: 7px; border-radius: 50%; background: #f0b429; }
+.topnav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--primary-lt); color: #0E2A21; font-weight: 700; font-size: 12.5px; padding: 7px 16px; border-radius: 20px; }
+.topnav-cta:hover { background: #5cc98d; }
 
-.hero { background: linear-gradient(150deg, #14113B 0%, #241C6B 55%, #362E9E 100%); color: #fff; padding: 60px 0 52px; border-bottom: 3px solid var(--primary-lt); }
+.hero { background: linear-gradient(150deg, #0E2A21 0%, #153A2E 55%, #2E8B57 100%); color: #fff; padding: 60px 0 52px; border-bottom: 3px solid var(--primary-lt); }
 .hero-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 .hero-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16); border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,.80); letter-spacing: .3px; margin-bottom: 18px; }
 .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #f0b429; }
 .hero h1 { font-size: 30px; font-weight: 800; letter-spacing: -.8px; line-height: 1.35; margin-bottom: 16px; max-width: 760px; }
-.hero h1 em { color: #A5B4FC; font-style: normal; }
+.hero h1 em { color: #A7E8C0; font-style: normal; }
 .hero p { font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.8; max-width: 660px; margin-bottom: 10px; }
 .hero-btns { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-.hero-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--primary-lt); color: #fff; border-radius: var(--r); font-size: 13px; font-weight: 700; transition: background .15s; }
-.hero-btn-primary:hover { background: #7c80f5; }
+.hero-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--primary-lt); color: #0E2A21; border-radius: var(--r); font-size: 13px; font-weight: 700; transition: background .15s; }
+.hero-btn-primary:hover { background: #5cc98d; }
 .hero-btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.20); color: rgba(255,255,255,.88); border-radius: var(--r); font-size: 13px; font-weight: 600; transition: background .15s; }
 .hero-btn-outline:hover { background: rgba(255,255,255,.14); }
 
@@ -76,46 +71,33 @@ ul { list-style: none; }
 .wide-h2 { font-size: 21px; font-weight: 800; margin-bottom: 8px; letter-spacing: -.4px; }
 .wide-sub { font-size: 13.5px; color: var(--sub); margin-bottom: 26px; line-height: 1.75; max-width: 760px; }
 
-.role-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
-.role-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 18px; box-shadow: var(--shadow-1); transition: border-color .15s, transform .1s; }
-.role-card:hover { border-color: var(--primary-lt); transform: translateY(-1px); }
-.role-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--primary-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; margin-bottom: 12px; }
-.role-title { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
-.role-desc { font-size: 12px; color: var(--sub); line-height: 1.7; }
-
-.principle-strip { background: var(--primary-bg); border: 1px solid var(--primary-bd); border-radius: var(--r); padding: 18px 20px; font-size: 12.5px; color: var(--text); line-height: 1.8; margin-bottom: 24px; }
-.principle-strip strong { color: var(--primary); }
-
-.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.diff-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow-1); }
-.diff-num { width: 26px; height: 26px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
-.diff-title { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
-.diff-desc { font-size: 12px; color: var(--sub); line-height: 1.65; }
+.sector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 26px; }
+.sector-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow-1); text-align: center; }
+.sector-card .ico { font-size: 20px; margin-bottom: 8px; }
+.sector-card .name { font-size: 12.5px; font-weight: 800; }
 
 .flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 8px; }
-.flow-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--border); border-bottom: none; position: relative; }
+.flow-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--border); border-bottom: none; }
 .flow-item:first-child { border-radius: var(--r) var(--r) 0 0; }
 .flow-item:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 var(--r) var(--r); }
-.flow-item.highlight { background: var(--teal-bg); border-color: var(--teal); border-top: 2px solid var(--teal); border-bottom: 2px solid var(--teal); z-index: 1; }
 .flow-num { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.flow-item.highlight .flow-num { background: var(--teal); }
 .flow-body { flex: 1; }
-.flow-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; flex-wrap: wrap; }
-.flow-title { font-size: 14px; font-weight: 800; }
+.flow-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
 .flow-desc { font-size: 12.5px; color: var(--sub); line-height: 1.65; }
 
 .badge { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 10px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-.badge-teal   { background: var(--teal-bg); color: var(--teal-dk); }
-.badge-blue   { background: var(--primary-bg); color: var(--primary); }
-.badge-orange { background: var(--orange-bg); color: var(--orange); }
-.badge-green  { background: var(--green-bg); color: var(--green); }
+.badge-green  { background: var(--primary-bg); color: var(--primary-dk); }
+.badge-blue   { background: var(--blue-bg); color: var(--blue); }
 .badge-gray   { background: #EDEFF3; color: var(--sub); }
 
-.branch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
-.branch-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow-1); }
-.branch-head { font-size: 12.5px; font-weight: 800; margin-bottom: 8px; color: var(--primary); }
-.branch-list { font-size: 11.5px; color: var(--sub); line-height: 1.9; padding-left: 14px; }
-.branch-list li { list-style: disc; }
+.table-wrap { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-1); margin-bottom: 10px; }
+table.svc-table { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--surface); }
+table.svc-table th { background: #EDEFF3; text-align: left; padding: 10px 14px; font-weight: 700; color: var(--sub); }
+table.svc-table td { padding: 10px 14px; border-top: 1px solid var(--border); color: var(--text); }
+table.svc-table td.hondi { color: var(--primary-dk); font-weight: 600; }
+
+.disclaimer-box { background: var(--blue-bg); border: 1px solid #BEDAF0; border-radius: var(--r); padding: 18px 20px; font-size: 13px; color: var(--text); line-height: 1.85; margin-bottom: 10px; }
+.disclaimer-box b { color: var(--blue); }
 
 .limit-list { display: flex; flex-direction: column; gap: 10px; }
 .limit-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--orange); border-radius: var(--r); padding: 14px 16px; box-shadow: var(--shadow-1); }
@@ -126,192 +108,120 @@ ul { list-style: none; }
 .docs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .doc-card { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; box-shadow: var(--shadow-1); transition: border-color .15s, transform .1s; }
 .doc-card:hover { border-color: var(--primary-lt); transform: translateY(-1px); }
-.doc-icon { width: 30px; height: 30px; border-radius: 7px; background: var(--primary-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.doc-title { font-size: 12.5px; font-weight: 700; margin-bottom: 3px; }
-.doc-desc { font-size: 11.5px; color: var(--hint); line-height: 1.55; }
+.doc-icon { color: var(--primary); font-size: 16px; flex-shrink: 0; }
+.doc-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.doc-desc { font-size: 11.5px; color: var(--sub); line-height: 1.6; }
 
-footer { background: var(--gov-header); color: rgba(255,255,255,.55); padding: 30px 0; }
-.footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 11.5px; }
-.footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+footer { background: var(--gov-header); padding: 22px 0; }
+.footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 11.5px; color: rgba(255,255,255,.55); }
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { color: rgba(255,255,255,.75); font-weight: 600; }
 .footer-links a:hover { color: #fff; }
 
-@media (max-width: 860px) {
-  .diff-grid, .docs-grid, .role-grid, .branch-grid { grid-template-columns: 1fr; }
+@media (max-width: 720px) {
+  .sector-grid { grid-template-columns: repeat(2, 1fr); }
+  .docs-grid { grid-template-columns: 1fr; }
   .topnav-links { display: none; }
 }
 </style>
 </head>
 <body>
 
-<div class="gov-bar">혼디넷(hondi.net) K-서비스 — <a href="https://hondi.net" target="_blank">hondi.net으로 돌아가기 ↗</a></div>
-
 <nav class="topnav">
   <div class="topnav-inner">
-    <a href="#top" class="topnav-logo"><span class="topnav-logo-icon">K</span>K-City</a>
+    <a href="./" class="topnav-logo"><span class="topnav-logo-icon">城</span> K-City</a>
     <div class="topnav-links">
-      <a href="#intro">소개</a>
-      <a href="#roles">네 개의 역할</a>
-      <a href="#flow">처리 흐름</a>
-      <a href="#limits">아직 없는 것</a>
+      <a href="#sectors">복지 부문</a>
+      <a href="#flow">설계 절차</a>
+      <a href="#limits">정직한 한계</a>
       <a href="#docs">문서</a>
     </div>
     <div class="topnav-right">
-      <div class="topnav-status"><span class="status-dot-amber"></span>설계 단계 · 실제 서비스 미연동</div>
+      <a class="topnav-cta" href="./webapp.html">설계안 요청하기 →</a>
     </div>
   </div>
 </nav>
 
-<div id="top"></div>
-<div class="hero">
+<header class="hero">
   <div class="hero-inner">
-    <div class="hero-tag"><span class="hero-tag-dot"></span> 설계 단계 · 정본 문서 공개</div>
-    <h1>재개발·재건축, <em>주민도 조합도 지자체도</em><br>같은 사실 위에서 진행합니다.</h1>
-    <p>K-City는 정비사업의 주민 의사 수렴, 법정 절차 진행, 기존 부동산 감정평가 추정, 철거·건설 비용 추산, 분양 계획, 건설 계획 수립과 시공사 선정을 실제로 실행하는 혼디넷의 정비사업 보조 AI입니다.</p>
-    <p>주민·조합/추진위원회·지방자치단체·국가 — 이해가 종종 충돌하는 네 주체를 동시에 상대하되, 같은 사업장의 같은 사실은 누가 묻든 똑같이 답합니다.</p>
+    <div class="hero-tag"><span class="hero-tag-dot"></span>혼디넷 K-서비스 · 초안(v0.1) 단계</div>
+    <h1>시민 복지 총합이 최상이 되는<br><em>도시 시설 배치</em>를 설계합니다</h1>
+    <p>K-City는 주거·의료·교육·금융·교통·통신·레저 등 도시 전체 복지 총합이 최상이 되도록, 각 시설의 물리적 조합(입지·규모·용량 배분)을 설계하는 자문 서비스입니다. 산출물은 시민 심의를 위한 설계안이며, 실제 인허가·행정처분은 항상 지자체·국가기관의 권한입니다.</p>
     <div class="hero-btns">
-      <a href="./webapp.html" class="hero-btn-primary">역할 선택하고 시작 ↗</a>
-      <a href="./prompts/k-city_v1_0.md" target="_blank" class="hero-btn-outline">정본 문서(k-city_v1_0.md) ↗</a>
+      <a href="./webapp.html" class="hero-btn-primary">설계안 요청하기 →</a>
+      <a href="#sectors" class="hero-btn-outline">다루는 복지 부문 보기</a>
     </div>
   </div>
-</div>
+</header>
 
-<section id="intro">
-  <div class="wide-section">
-  <div class="section-title">정체성</div>
-  <h2 class="wide-h2">네 개의 역할, 하나의 사실 기반</h2>
-  <p class="wide-sub">K-City는 한 사업장(구역) 안에서 이해관계가 서로 다른 네 주체를 동시에 상대합니다. 조합원 개인은 감정가가 높게 나오길 바라지만 조합 전체 사업성은 낮은 총사업비를 원할 수 있고, 조합이 제출한 사업시행계획을 지자체는 심사·검토하는 입장입니다. K-City는 이 구조를 인지하고, 같은 사업장의 같은 사실(면적·세대수·진행 단계·법정 요건 충족 여부)은 누가 묻든 동일하게 답합니다.</p>
-  <div class="principle-strip">
-    가장 먼저 지키는 원칙은 <strong>역할에 유리하도록 같은 사실을 다르게 말하지 않는 것</strong>입니다. 그다음은 <strong>권한의 경계를 지키는 것</strong>입니다 — 정비구역 지정, 조합설립인가, 사업시행인가, 관리처분인가 등 법적 효력이 있는 처분은 지자체의 고유 권한이고, 총회 의결·시공사 계약 체결은 조합(원)의 고유 권한입니다. K-City는 신청서·계획서·비교표·의결안을 <strong>초안으로 준비</strong>하고 법정 요건 충족 여부를 <strong>계산·추적</strong>하지만, 실제 인가·의결·계약 체결을 대신하거나 확정된 것처럼 보고하지 않습니다.
-  </div>
+<section class="wide-section" id="sectors">
+  <div class="section-title">복지 부문</div>
+  <h2 class="wide-h2">7개 부문을 한 번에 통합 최적화합니다</h2>
+  <p class="wide-sub">부문마다 따로 검토하지 않고, 예산·토지 제약 안에서 전체 복지 총합을 함께 계산합니다.</p>
+  <div class="sector-grid">
+    <div class="sector-card"><div class="ico">🏠</div><div class="name">주거</div></div>
+    <div class="sector-card"><div class="ico">🏥</div><div class="name">의료</div></div>
+    <div class="sector-card"><div class="ico">🎓</div><div class="name">교육</div></div>
+    <div class="sector-card"><div class="ico">🏦</div><div class="name">금융</div></div>
+    <div class="sector-card"><div class="ico">🚌</div><div class="name">교통</div></div>
+    <div class="sector-card"><div class="ico">📡</div><div class="name">통신</div></div>
+    <div class="sector-card"><div class="ico">🎡</div><div class="name">레저</div></div>
+    <div class="sector-card"><div class="ico">➕</div><div class="name">지역 특성별 추가 가능</div></div>
   </div>
 </section>
 
 <div class="wide-section alt">
-  <div class="wide-section alt-inner" id="roles">
-    <div class="section-title">네 개의 역할</div>
-    <h2 class="wide-h2">화자가 누구냐에 따라 산출물이 달라집니다</h2>
-    <p class="wide-sub">매 세션 시작 시 화자가 어느 역할로 말하는지부터 확정합니다 — 명시되지 않으면 되묻습니다. 한 사업장 안에서 서로 다른 역할의 이해관계를 대변해 상대방과 교섭·설득하는 행위는 하지 않습니다.</p>
-    <div class="role-grid">
-      <div class="role-card">
-        <div class="role-icon">주</div>
-        <div class="role-title">주민</div>
-        <div class="role-desc">개별 소유자·조합원. 내 재산 감정가 추정, 분담금·환급금 계산, 이주비 대출 범위, 조합 총회 안건 이해, 이의제기 절차 안내.</div>
+  <div class="wide-section alt-inner" id="flow">
+    <div class="section-title">설계 절차</div>
+    <h2 class="wide-h2">현황 수집 → 모델링 → 통합 최적화 → 시나리오 비교 → 실행안 → 피드백</h2>
+    <p class="wide-sub">하나의 안만 제시하지 않고, 예산·우선순위별로 최소 2개 이상의 대안을 나란히 비교합니다.</p>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-body"><div class="flow-title">현황·수요 데이터 집계</div><div class="flow-desc">인구·연령 분포, 기존 시설 위치·용량, 접근성(이동시간·거리)을 모읍니다.</div></div>
       </div>
-      <div class="role-card">
-        <div class="role-icon">조</div>
-        <div class="role-title">조합/추진위원회</div>
-        <div class="role-desc">동의서 징구 현황 추적, 총회 안건·설명자료 준비, 전체 사업비 추산, 분양계획 시뮬레이션, 시공사 입찰 비교표.</div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-body"><div class="flow-title">부문별 효용 모델링</div><div class="flow-desc">주거·의료·교육·금융·교통·통신·레저 각 부문의 접근성·충족도를 계산합니다.</div></div>
       </div>
-      <div class="role-card">
-        <div class="role-icon">자</div>
-        <div class="role-title">지방자치단체</div>
-        <div class="role-desc">인허가 신청서 법정 요건 체크리스트, 처리 기한 추적, 관할 내 사업장 비교, 고시문 초안 — 최종 인가는 담당 공무원의 검토·결재 후 확정.</div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-body"><div class="flow-title">통합 최적화</div><div class="flow-desc">예산·토지·인허가 제약 안에서 복지 총합을 최대화하는 시설 조합(신설·증설·이전·통폐합)을 찾습니다.</div></div>
       </div>
-      <div class="role-card">
-        <div class="role-icon">국</div>
-        <div class="role-title">국가</div>
-        <div class="role-desc">여러 지자체·사업장에 걸친 정책 통계 집계, 법령·시행령·시행규칙 근거 대조, 지역별 분양가·처리기간 추이.</div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-body"><div class="flow-title">시나리오 비교·실행안</div><div class="flow-desc">예산 수준·우선순위별 복수 대안을 병렬로 제시하고, 단계적 실행 우선순위·예산 배분 초안을 작성합니다.</div></div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div class="flow-body"><div class="flow-title">시민 피드백 반영</div><div class="flow-desc">실행 이후 실측 이용률·만족도를 다음 설계 주기에 반영합니다.</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<section class="wide-section" id="flow">
-  <div class="section-title">처리 흐름</div>
-  <h2 class="wide-h2">K-Intent → K-Compose(역할 분기) → K-Execute → K-Deliver → K-Report → 반추 → 경험의 공유</h2>
-  <p class="wide-sub">K-City는 별도의 파이프라인을 새로 만들지 않고, AC의 표준 5단계 오케스트레이션 체인을 그대로 차용합니다. K-City만의 차별점은 체인 자체가 아니라, 화자의 역할부터 확정하는 K-Intent의 관문과, K-Compose 이하가 역할별로 갈라지는 분기 구조, 그리고 추정치와 확정치를 구조적으로 분리해 다루는 원칙입니다.</p>
-
-  <div class="flow">
-    <div class="flow-item">
-      <div class="flow-num">1</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">K-Intent — 역할·사업장·단계 확정</span></div>
-        <div class="flow-desc">화자가 주민·조합·지자체·국가 중 어디인지부터 확정합니다. 어느 사업장(구역)의 어느 절차 단계인지 확인하고, 같은 이름의 구역이 여러 개일 수 있음에 유의해 주소 지번으로 재확인합니다.</div>
-      </div>
-    </div>
-    <div class="flow-item highlight" id="compose">
-      <div class="flow-num">2</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">K-Compose — 역할별 실행 방식 설계</span><span class="badge badge-teal">역할 분기 지점</span></div>
-        <div class="flow-desc">요청을 받자마자 임의 양식으로 바로 계산·작성하지 않고, 어떤 근거로 무엇을 산출할지 역할별로 먼저 설계합니다.</div>
-        <div class="branch-grid">
-          <div class="branch-card">
-            <div class="branch-head">주민</div>
-            <ul class="branch-list"><li>감정가 추정 방식·한계 고지</li><li>분담금·환급금 계산 (출처 구분)</li><li>이주비 대출 가능 범위</li><li>총회 안건 해설</li></ul>
-          </div>
-          <div class="branch-card">
-            <div class="branch-head">조합/추진위</div>
-            <ul class="branch-list"><li>동의율 vs 법정 요건 추적</li><li>총회 의결 요건 확인</li><li>사업비 항목별 추산</li><li>시공사 비교표</li></ul>
-          </div>
-          <div class="branch-card">
-            <div class="branch-head">지방자치단체</div>
-            <ul class="branch-list"><li>인허가 요건 체크리스트</li><li>처리 기한 추적</li><li>관할 내 사업장 비교</li><li>고시문 초안</li></ul>
-          </div>
-          <div class="branch-card">
-            <div class="branch-head">국가</div>
-            <ul class="branch-list"><li>정책 통계 집계</li><li>법령 근거 대조</li><li>지역별 추이 비교</li></ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">3</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">K-Execute — 실행</span></div>
-        <div class="flow-desc">감정평가 초안(공시지가·실거래가·유사 사례 대조), 비용 추산, 분양 시뮬레이션, 시공사 비교표를 실제로 산출합니다. 모든 문서 수정은 이전 버전과의 차이를 사용자가 알 수 있게 표시합니다.</div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">4</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">K-Deliver — 결과 정리</span></div>
-        <div class="flow-desc">역할별 산출물을 그 역할에 맞는 형태로 정리합니다. 여러 사업장을 동시에 다루는 경우 사업장별로 구분하고, 추정치와 확정치를 시각적으로 구분해 제시합니다.</div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">5</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">K-Report — 기록</span></div>
-        <div class="flow-desc">산출값을 PDV/사업장 기록에 남기되, 추정치는 반드시 "추정"으로 태깅해 이후 확정치와 구분 보관합니다. 확정 수치가 들어오면 이전 추정치와의 오차를 함께 남깁니다.</div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">6</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">반추(Retrospection)</span><span class="badge badge-gray">강제 · 선택 기능 아님</span></div>
-        <div class="flow-desc">확정치가 새로 들어오면 자동 트리거됩니다. 추정 방법론 결함 / 입력 데이터 노후 / 외부 변수로 오차 원인을 분류하고, 정서적으로 예민한 시점(분담금 증가 등)에는 어조를 조절해 담담하게 전달합니다.</div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">7</div>
-      <div class="flow-body">
-        <div class="flow-title-row"><span class="flow-title">경험의 공유 — 집단 학습 저장소</span></div>
-        <div class="flow-desc">비식별화·일반화된 방법론적 교훈만 저장소에 남습니다. 조합명·구역명·개인 식별 정보, 특정 시공사와의 계약 세부 조건은 포함되지 않습니다.</div>
-      </div>
-    </div>
+<section class="wide-section">
+  <div class="section-title">다른 K-서비스와의 연계</div>
+  <h2 class="wide-h2">설계는 K-City, 조달·심의·운영은 다른 K-서비스가 맡습니다</h2>
+  <div class="table-wrap">
+    <table class="svc-table">
+      <thead><tr><th>상황</th><th>자동 연동</th></tr></thead>
+      <tbody>
+        <tr><td>신설 시설의 장기 조달 예측</td><td class="hondi">K-JIT — 장기 수요 데이터로 전달</td></tr>
+        <tr><td>시공 단계 자재 조달</td><td class="hondi">K-Logistics</td></tr>
+        <tr><td>시민 심의·의사결정</td><td class="hondi">K-Democracy — 설계안을 심의 절차에 전달</td></tr>
+        <tr><td>교통·의료·교육 현황 데이터</td><td class="hondi">K-Traffic·K-Health·K-School과 데이터 교환</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
 <div class="wide-section alt">
   <div class="wide-section alt-inner">
-    <div class="section-title">인접 서비스와의 구분</div>
-    <h2 class="wide-h2">K-City가 아닌 것</h2>
-    <div class="diff-grid">
-      <div class="diff-card">
-        <div class="diff-num">1</div>
-        <div class="diff-title">K-Law가 아닙니다</div>
-        <div class="diff-desc">K-Law는 법률 자문·소송 대응 중심이고, K-City는 정비사업 절차의 실행 중심입니다. 조합원 지위 관련 소송 등 실제 쟁송으로 번지면 K-Law로 연계 안내합니다.</div>
-      </div>
-      <div class="diff-card">
-        <div class="diff-num">2</div>
-        <div class="diff-title">지자체 내부 행정시스템이 아닙니다</div>
-        <div class="diff-desc">지자체 역할로 쓰일 때도 시민이 제출하기 전 자체 검토용이거나, 담당 공무원이 여러 사업장을 비교하는 보조 도구입니다 — 내부 행정시스템의 대체물이 아닙니다.</div>
-      </div>
-      <div class="diff-card">
-        <div class="diff-num">3</div>
-        <div class="diff-title">질의응답형 EXPERT 페르소나가 아닙니다</div>
-        <div class="diff-desc">"감정평가가 뭔가요"로 끝나지 않고, 실제 그 사업장의 데이터로 추정치를 계산해 내는 실행형 AI입니다.</div>
-      </div>
+    <div class="section-title">면책 원칙</div>
+    <h2 class="wide-h2">설계안이지, 확정된 도시계획이 아닙니다</h2>
+    <div class="disclaimer-box">
+      <b>K-City의 산출물은 자문 설계안입니다.</b> 실제 도시계획시설 결정·건축 인허가는 언제나 해당 지자체·국가기관의 법정 권한이며, K-City는 의사결정을 보조하는 자문 설계안을 신속하게 제공하는 역할에 그칩니다. K-Law의 가상 판결문이 그 자체로 법원 판결이 아닌 것과 같은 구조입니다.
     </div>
   </div>
 </div>
@@ -319,31 +229,23 @@ footer { background: var(--gov-header); color: rgba(255,255,255,.55); padding: 3
 <section class="wide-section" id="limits">
   <div class="section-title">정직한 한계 고지</div>
   <h2 class="wide-h2">아직 없는 것 — 추측으로 채우지 않습니다</h2>
-  <p class="wide-sub">혼디넷의 정확성과 정직성 원칙(U2)에 따라, 실제보다 더 된 것처럼 포장하지 않습니다. "완전 자동화"나 "AI가 인가를 처리" 같은 표현을 쓰지 않습니다 — 인가·의결·계약 체결은 항상 권한을 가진 사람·기관의 몫입니다.</p>
+  <p class="wide-sub">혼디넷의 정확성과 정직성 원칙(U2)에 따라, 실제보다 더 된 것처럼 포장하지 않습니다.</p>
   <div class="limit-list">
     <div class="limit-item">
       <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>지자체 행정시스템(정비사업 통합홈페이지 등) 실시간 연동</strong> — 현재는 사용자가 제공하거나 공개된 고시문·자료를 근거로 계산·정리하는 수준까지만 합니다.</div>
+      <div class="limit-text"><strong>복지 총합 가중치·계량 모델</strong> — 부문별 가중치·충족도 함수는 초안 수준이며, K-Law가 대법원 공개 판례로 검증했던 것과 같은 실측 검증이 아직 없습니다.</div>
     </div>
     <div class="limit-item">
       <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>법정 감정평가법인 실제 평가 시스템 연동</strong> — 감정가는 항상 추정치이며, 법적 효력이 있는 평가서를 발급하지 않습니다.</div>
+      <div class="limit-text"><strong>매몰비용·전환비용</strong> — 기존 시설을 통폐합·이전할 때의 전환비용 계량 모델이 미확정입니다.</div>
     </div>
     <div class="limit-item">
       <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>조합 총회 전자투표·실제 의결 처리</strong> — 안건 준비·설명자료 작성까지만 하며, 실제 의결은 조합 정관·절차대로 별도 진행됩니다.</div>
+      <div class="limit-text"><strong>인허가·행정처분</strong> — K-City는 인허가 권한이 없습니다. 설계안이 실제 도시계획으로 전환되려면 항상 지자체·국가기관의 별도 절차를 거쳐야 합니다.</div>
     </div>
     <div class="limit-item">
       <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>시공사와의 실제 계약 체결·전자계약 연동</strong> — 비교표·조건 초안까지만 작성합니다.</div>
-    </div>
-    <div class="limit-item">
-      <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>지자체의 실제 인가·고시 처리</strong> — 검토용 체크리스트·초안까지만 준비합니다.</div>
-    </div>
-    <div class="limit-item">
-      <span class="limit-icon">⚠</span>
-      <div class="limit-text"><strong>실제 대화 백엔드·과금 경로·PDV 연동</strong> — 이 사이트는 설계 단계이며, 아래 "역할 선택하고 시작" 화면은 역할별 산출물의 형태를 미리 보여주는 데모입니다. 실제 대화형 실행은 아직 연결되지 않았습니다.</div>
+      <div class="limit-text"><strong>백엔드 연동</strong> — sp-catalog.json 등록과 hondi-proxy(worker.js)의 <code>/kcity/relay</code> 라우팅이 아직 연결되지 않았습니다. 아래 "설계안 요청하기"는 로그인·과금 흐름까지는 동작하지만, 실제 AI 설계안 산출은 백엔드 연결 이후에 동작합니다.</div>
     </div>
   </div>
 </section>
@@ -352,35 +254,23 @@ footer { background: var(--gov-header); color: rgba(255,255,255,.55); padding: 3
   <div class="wide-section alt-inner" id="docs">
     <div class="section-title">문서</div>
     <h2 class="wide-h2">개발자·후속 담당자를 위한 기술 문서</h2>
-    <p class="wide-sub">이 사이트의 내용은 아래 정본 문서(k-city_v1_0.md, city-kr_v1_0.md)를 기준으로 작성됐습니다. 정본이 개정되면 이 페이지도 함께 갱신해야 합니다.</p>
+    <p class="wide-sub">이 사이트의 내용은 아래 정본 문서를 기준으로 작성됐습니다. 정본이 개정되면 이 페이지도 함께 갱신해야 합니다.</p>
     <div class="docs-grid">
-      <a class="doc-card" href="./prompts/k-city_v1_0.md" target="_blank">
+      <a class="doc-card" href="https://github.com/Openhash-Gopang/city/blob/main/SP-27_kcity_v0_1.txt" target="_blank">
         <div class="doc-icon">◆</div>
-        <div>
-          <div class="doc-title">k-city_v1_0.md — 정본(글로벌)</div>
-          <div class="doc-desc">K-City의 모든 원칙·역할 분기·단계·변경 이력이 담긴 시스템 프롬프트 원문.</div>
-        </div>
-      </a>
-      <a class="doc-card" href="./prompts/city-kr_v1_0.md" target="_blank">
-        <div class="doc-icon">◆</div>
-        <div>
-          <div class="doc-title">city-kr_v1_0.md — 국가모듈(한국)</div>
-          <div class="doc-desc">도시정비법 기반 법정 동의율·절차 기간 등 한국 고유 제도.</div>
-        </div>
+        <div><div class="doc-title">SP-27_kcity_v0_1.txt — 정본(초안)</div><div class="doc-desc">K-City의 범위·복지 목적함수·시민 참여 원칙·경계가 담긴 설계 문서.</div></div>
       </a>
       <a class="doc-card" href="https://hondi.net" target="_blank">
         <div class="doc-icon">◆</div>
-        <div>
-          <div class="doc-title">hondi.net</div>
-          <div class="doc-desc">혼디넷 메인 사이트 — "서비스" 메뉴에서 다른 K-서비스도 함께 확인할 수 있습니다.</div>
-        </div>
+        <div><div class="doc-title">hondi.net</div><div class="doc-desc">혼디넷 메인 사이트 — "K-서비스" 메뉴에서 다른 K-서비스도 함께 확인할 수 있습니다.</div></div>
       </a>
       <a class="doc-card" href="https://github.com/Openhash-Gopang/city" target="_blank">
         <div class="doc-icon">◆</div>
-        <div>
-          <div class="doc-title">GitHub — Openhash-Gopang/city ↗</div>
-          <div class="doc-desc">K-City 전용 저장소. 이 사이트의 소스와 정본 문서가 이곳에 있습니다.</div>
-        </div>
+        <div><div class="doc-title">GitHub — Openhash-Gopang/city ↗</div><div class="doc-desc">K-City 관련 문서와 코드가 모두 이곳에 있습니다.</div></div>
+      </a>
+      <a class="doc-card" href="https://github.com/Openhash-Gopang/hondi" target="_blank">
+        <div class="doc-icon">◆</div>
+        <div><div class="doc-title">GitHub — Openhash-Gopang/hondi ↗</div><div class="doc-desc">혼디넷 메인 저장소(worker.js·sp-catalog.json 등).</div></div>
       </a>
     </div>
   </div>
@@ -391,7 +281,7 @@ footer { background: var(--gov-header); color: rgba(255,255,255,.55); padding: 3
     <div>© 2026 혼디넷(hondi.net) · K-City · 팀 주피터</div>
     <div class="footer-links">
       <a href="https://hondi.net" target="_blank">hondi.net</a>
-      <a href="https://plan.hondi.net" target="_blank">plan.hondi.net</a>
+      <a href="https://klaw.hondi.net" target="_blank">klaw.hondi.net</a>
       <a href="https://github.com/Openhash-Gopang/city" target="_blank">GitHub</a>
     </div>
   </div>
