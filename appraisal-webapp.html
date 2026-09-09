@@ -126,9 +126,11 @@ document.getElementById('preview-btn').addEventListener('click', function(){
   var body = document.getElementById('preview-body');
   body.innerHTML = '';
   var rows = [
-    ['적용 방법', '비교사례법 + 공시지가기준법 (교차검증)', ''],
+    ['적용 방법', 'SP_appraiser 위임 — 비교사례법 + 공시지가기준법 (교차검증)', ''],
+    ['확신도', 'MEDIUM 🟡 (SP_appraiser STEP B-2)', ''],
     ['참조 사례', '인근 유사 거래 5건', ''],
     ['출처', '2026년 개별공시지가 · 국토교통부 실거래가 공개시스템', 'confirmed'],
+    ['강제 인간전환 여부', '아니오 (소송·상속·과세 상황 아님)', ''],
     ['요청 목적', purpose === 'urban_renewal_contribution' ? '재개발 분담금 참고용 (도시정비 모듈 호출)' : '일반 시세 문의', ''],
     ['고지', '참고용 추정치이며 법정 감정평가가 아님', 'est']
   ];
