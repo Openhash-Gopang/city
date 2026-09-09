@@ -123,7 +123,7 @@ footer { background: var(--gov-header); padding: 22px 0; }
     <div class="breadcrumb"><a href="./" style="color:rgba(255,255,255,.75)">K-City</a> › 하위 모듈</div>
     <div class="hero-tag"><span class="hero-tag-dot"></span>K-City 하위 모듈 · 초안(v0.1) 단계 · 다른 모듈이 호출하는 유틸리티</div>
     <h1>이 부동산은 <em>얼마로 추정</em>되는가</h1>
-    <p>감정평가(추정) 모듈은 도시정비(재개발) 모듈을 비롯해 부동산 가치 추정이 필요한 여러 K-서비스가 공유해서 호출하는 범용 모듈입니다. 도시정비 모듈은 더 이상 자체 감정평가 기능을 갖지 않고, 감정가가 필요할 때마다 이 모듈을 호출합니다.</p>
+    <p>감정평가(추정) 모듈은 새 로직을 만드는 대신, Hondi가 이미 갖고 있는 감정평가사 전문가 페르소나(SP_appraiser)를 그대로 호출하는 어댑터입니다 — 도시정비(재개발) 모듈을 비롯해 부동산 가치 추정이 필요한 여러 K-서비스가 공유해서 씁니다. 확신도 라벨(🔴🟡🟢)과 소송·상속·과세 등 상황의 인간 감정평가사 강제 연결까지 그 페르소나의 판단을 그대로 따릅니다.</p>
     <div class="hero-btns">
       <a href="./appraisal-webapp.html" class="hero-btn-primary">추정 미리보기 →</a>
       <a href="./SP-27b_kcity_appraisal_v0_1.txt" target="_blank" class="hero-btn-outline">정본 문서(SP-27b) 보기</a>
@@ -133,8 +133,8 @@ footer { background: var(--gov-header); padding: 22px 0; }
 
 <section class="wide-section" id="callers">
   <div class="section-title">누가 호출하는가</div>
-  <h2 class="wide-h2">호출자에 종속되지 않는 범용 모듈</h2>
-  <p class="wide-sub">이 모듈은 특정 상위 모듈의 일부가 아니라, 부동산 가치 추정이 필요한 누구든 호출할 수 있는 독립 유틸리티입니다.</p>
+  <h2 class="wide-h2">이미 있는 감정평가사 페르소나를 그대로 씁니다</h2>
+  <p class="wide-sub">Hondi에는 K-Law 소속 전문가 페르소나로 이미 감정평가사 역할(SP_appraiser)이 있습니다 — 3방식 적용, 실거래가 웹검색, 확신도 판정, 소송·상속·과세 상황의 인간 전문가 강제 연결까지 갖춘 성숙한 페르소나입니다. 이 모듈은 그 페르소나를 다시 구현하지 않고 그대로 호출하는 어댑터입니다. 호출자에 종속되지 않는 범용 모듈이라, 부동산 가치 추정이 필요한 누구든 쓸 수 있습니다.</p>
   <div class="caller-grid">
     <div class="caller-card">
       <div class="caller-title">도시정비(재개발) 모듈</div>
@@ -156,24 +156,38 @@ footer { background: var(--gov-header); padding: 22px 0; }
     <div class="section-title">호출 인터페이스</div>
     <h2 class="wide-h2">다른 모듈이 이렇게 호출하고, 이렇게 돌려받습니다</h2>
     <p class="wide-sub">호출한 대상이 사람인지 다른 모듈인지 구분하지 않고 같은 형식으로 응답합니다 — 다만 목적(purpose)에 따라 설명 방식은 달라질 수 있습니다.</p>
-    <span class="io-label">요청 (예: 도시정비 모듈 → 본 모듈)</span>
+    <span class="io-label">Request (e.g. urban renewal module -> this module)</span>
     <div class="io-box">{"agency":"kcity","module":"appraisal","task_key":"...",
- "target":{"address":"영도구 청학1구역 내 소유 주택","area_sqm":84.9,"type":"residential"},
- "purpose":"urban_renewal_contribution",
+ "target":{"address":"영도구 청학1구역 내 소유 주택","area_sqm":84.9,"type":"residential",
+           "floor":"12","orientation":"남향","built_year":1998},
+ "purpose":"redevelopment_contribution",
  "requested_by":"module:urban_renewal"}</div>
-    <span class="io-label">응답</span>
-    <div class="io-box">{"task_key":"...", "estimate":{"amount":310000000,"unit":"KRW","as_of":"2026-09-09"},
+    <span class="io-label">Response (SP_appraiser STEP B/D output, reshaped)</span>
+    <div class="io-box">{"task_key":"...", "estimate_range":{"low":300000000,"high":320000000,"unit":"KRW","as_of":"2026-09-09"},
  "methods_used":["comparable_sales","official_land_price"],
- "cross_check_delta_pct":6.2, "confidence":"medium",
- "basis":["인근 유사 사례 5건","2026년 개별공시지가"],
- "disclaimer":"참고용 추정치이며 법정 감정평가가 아님"}</div>
+ "confidence_label":"MEDIUM",
+ "confidence_note":"실거래 데이터 표본 수·시점에 따라 추정 범위가 달라짐",
+ "forced_human_referral": false,
+ "basis":["최근 5건의 유사 거래 기준"],
+ "disclaimer":"이 안내는 인간 감정평가사에게 전달되어 검증받기 위한 1차 참고 자료입니다.",
+ "next_step":"[CONNECT_HUMAN_EXPERT: 감정평가사]"}</div>
   </div>
 </div>
 
+<section class="wide-section" id="confidence">
+  <div class="section-title">확신도 라벨 &amp; 강제 인간전환</div>
+  <h2 class="wide-h2">SP_appraiser의 판단을 그대로 따릅니다</h2>
+  <p class="wide-sub">모든 추정치에는 확신도 라벨이 붙습니다. 소송·상속·과세 등 법적 효력이 필요한 상황이면 <code>forced_human_referral</code>이 자동으로 켜져, 참고치만으로 진행하지 않도록 안내합니다.</p>
+  <div class="caller-grid">
+    <div class="caller-card"><div class="caller-title">HIGH (녹색)</div><div class="caller-desc">방법론·데이터 신뢰도 모두 높음 — 그래도 참고치입니다.</div></div>
+    <div class="caller-card"><div class="caller-title">MEDIUM (노랑)</div><div class="caller-desc">실거래 표본이 적거나 시점이 오래됨 — 폭을 넓게 봐야 합니다.</div></div>
+    <div class="caller-card"><div class="caller-title">LOW (빨강)</div><div class="caller-desc">근거자료 부족 — 반드시 인간 감정평가사 확인을 권합니다.</div></div>
+  </div>
+
 <section class="wide-section">
   <div class="section-title">추정 방법</div>
-  <h2 class="wide-h2">한국 감정평가 3방식을 참고해 간이 적용</h2>
-  <p class="wide-sub">둘 이상의 방법이 적용 가능하면 교차 검증하고, 방법 간 차이가 크면 그 차이를 함께 보고합니다.</p>
+  <h2 class="wide-h2">SP_appraiser가 쓰는 한국 감정평가 3방식</h2>
+  <p class="wide-sub">이 방법론은 이 페이지가 새로 만든 것이 아니라 SP_appraiser 페르소나의 STEP A~B에 이미 정의된 것을 그대로 보여줍니다. 둘 이상의 방법이 적용 가능하면 교차 검증하고, 방법 간 차이가 크면 그 차이를 함께 보고합니다.</p>
   <div class="method-list">
     <div class="method-item">
       <div class="method-num">1</div>
@@ -229,6 +243,10 @@ footer { background: var(--gov-header); padding: 22px 0; }
     <a class="doc-card" href="./SP-27b_kcity_appraisal_v0_1.txt" target="_blank">
       <div class="doc-icon">◆</div>
       <div><div class="doc-title">SP-27b_kcity_appraisal_v0_1.txt</div><div class="doc-desc">본 모듈의 범위·추정 방법·호출 인터페이스가 담긴 정본 문서.</div></div>
+    </a>
+    <a class="doc-card" href="https://github.com/Openhash-Gopang/gopang/blob/main/prompts/SP_appraiser_v1_9.md" target="_blank">
+      <div class="doc-icon">◆</div>
+      <div><div class="doc-title">SP_appraiser_v1_9.md (외부 저장소)</div><div class="doc-desc">본 모듈이 위임하는 실제 감정평가사 전문가 페르소나 정본 — gopang 저장소.</div></div>
     </a>
     <a class="doc-card" href="./urban-renewal.html">
       <div class="doc-icon">◆</div>
