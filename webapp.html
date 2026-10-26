@@ -90,7 +90,7 @@ main.chat{flex:1;overflow-y:auto;padding:18px 16px 12px;display:flex;flex-direct
   <div class="appbar-title">K-City 설계안 요청</div>
   <div class="appbar-balance" id="balance-chip">잔액 확인 중…</div>
   <a class="appbar-back" href="./">← 소개</a>
-</header>
+<span class="hondi-user-slot" data-hondi-user-slot="dark" style="flex:none;display:flex;align-items:center;padding-left:10px"></span></header>
 
 <div class="notice">
   이 화면은 초안(v0.1) 단계입니다. 로그인·잔액 조회는 정상 동작하지만, 실제 AI 설계안 산출은 hondi-proxy의 <code>/kcity/relay</code> 라우팅이 연결된 뒤부터 동작합니다. 산출물은 항상 자문 설계안이며, 실제 인허가·행정처분은 지자체·국가기관의 권한입니다. 자세한 내용은 <a href="./" style="text-decoration:underline">소개 페이지 "정직한 한계"</a>를 참고하세요.
@@ -101,8 +101,8 @@ main.chat{flex:1;overflow-y:auto;padding:18px 16px 12px;display:flex;flex-direct
 </main>
 
 <div class="composer">
-  <textarea id="input" placeholder="예: 한림읍 의료 접근성을 개선하고 싶습니다. 예산은 20억원 이내입니다" rows="1"></textarea>
-  <button id="send-btn">전송</button>
+  <textarea id="input" data-requires-login="설계안 요청" placeholder="예: 한림읍 의료 접근성을 개선하고 싶습니다. 예산은 20억원 이내입니다" rows="1"></textarea>
+  <button id="send-btn" data-requires-login="설계안 요청">전송</button>
 </div>
 
 <div class="login-overlay" id="login-overlay">
@@ -295,5 +295,6 @@ document.getElementById('input').addEventListener('keydown', (e) => {
 document.getElementById('login-send-btn').addEventListener('click', sendOtp);
 document.getElementById('login-verify-btn').addEventListener('click', verifyOtp);
 </script>
+<script src="https://hondi.net/auth/user-badge.js?v=20261027" defer></script>
 </body>
 </html>
